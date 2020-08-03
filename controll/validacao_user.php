@@ -2,7 +2,8 @@
 
 # Script temporario por enquanto nao estou usando o include na camada DAO!
 include('../model/Usuario.php');
-include('../model/dao/user_dao.php'); // Melhor usado o outro metodo 'require'
+include('../model/dao/user_dao.php');
+include('../model/dao/conexao_dao.php');
 
 session_start();
 $_SESSION['usuario_logado'] = null;
@@ -32,9 +33,9 @@ foreach($array_users as $user){
     if((strcasecmp($emailLogin, $user['email']) == 0) and ($senhaLogin == $user['senha'])){
         $_SESSION['validacao'] = true;
         $var = true;
-        //Passando o aray
+        //Passando o aray ao inves da classe Usuario: errado
         $_SESSION['usuario_logado'] = $user; 
-        print_r($user);
+        //print_r($user);
         ////echo "<br>";
         $user_logado = new Usuario($user['IDUsuario']);
         //Passando o objeto!

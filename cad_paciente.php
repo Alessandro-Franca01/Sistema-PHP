@@ -17,7 +17,7 @@
 
     <script>
         function acao(){
-            alert('Dados enviados!')
+            alert('Paciente cadastrado!')
         }
     </script>
 
@@ -36,7 +36,7 @@
       
       <a class="navbar-brand" href="#">
         <img src="./img/inc_form_paciente.png" width="30" height="30" >
-        Formulario de Atendimento
+        Cadastro de Paciente
       </a>
     </nav>
 

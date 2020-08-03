@@ -15,11 +15,11 @@ function gerarDatas($referencia, $passo, $quant){
     }
     return $lista_data; 
 }
-
+// Aqui: vou entrar com uma data e vai ser gerado uma semana 
 function gerarSemana($referencia){
     $cont = 0;
     $lista_data[$cont] = $referencia;
-    for($i = 0; $i <= 4; $i++){
+    for($i = 0; $i <= 4; $i++){ // sao 6 dias com o sabado "$i <= 5"
         $cont++;
         $lista_data[$cont] = new DateTime($referencia->format('Y-m-d')); 
         $lista_data[$cont]->add(new DateInterval('P'.$cont.'D'));
@@ -41,5 +41,55 @@ function gerarHorarios($dia, $inicio, $fim){
     return $horarios;
 }
 
+// Essa funcao vai gerar cada linha da tabela: FUNCIONANDO!
+function gerarLinha($horario, $semana){
+    $array_linha = array();
+    //$contar = count($semana);
+    for($i = 0; $i < count($semana); $i++ ){
+    //CRIANDO NOVA DATA ACRECENTANDO HORAS:
+    $data_hour = new DateTime($semana[$i]->format('Y-m-d'));
+    $data_hour->add(new DateInterval("PT".$horario."H"));
+    $array_linha[] = $data_hour;
+    }
+    return $array_linha;
+}
+
+# Função melhorada da funcao 'horario2', imprimos os horarios com os OBJECT TABLE correpondentemente
+function horario3($hora, $objetos_linha, $objetos_comparados){
+    echo "<tr>";
+        $cont = 0;
+        foreach($objetos_linha as $obj){
+            if($cont == 0){
+                echo "<td>".$hora.":00</td>";
+            }
+            $boll = null;
+            $obj_temp = null;
+            // Comparando as listas: Funcionando ainda tem um erro, passando um campo a mais!
+            foreach($objetos_comparados as $obj_comparado){
+                if($obj->__get("data_hora") == $obj_comparado->__get("data_hora") ){
+                    $boll = true;
+                    $obj_temp = $obj_comparado; // copiando o objeto para o outro foreach
+                    
+                    break;
+                    //echo "<td>".$first_name."</td>";
+                }else{
+                    $boll = false;
+                    // ACHO QUE NAO PRECISO DESSE ELSE!
+                }
+                
+            }
+            // o if e else tem que ficar aqui dentro:
+            if($boll){
+                $nome = $obj_temp->__get("paciente");
+                $array_name = explode(' ',$nome);
+                $first_name = $array_name[0];
+                echo "<td>".$first_name."</td>";
+            }else{
+            echo "<td>".$obj->__get("paciente")."</td>"; // esta errado aqui!
+            }
+            $cont++;
+        }
+    echo "</tr>";
+  }
 
 ?>

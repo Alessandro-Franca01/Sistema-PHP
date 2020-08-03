@@ -2,7 +2,9 @@
 # Testando conuslta ao banco para a pagunda de tabela semanal
 include('./model/tb_teste.php');
 require('./model/dao/tb_teste_dao.php');
-
+# Definindo TimeZone:
+date_default_timezone_set('America/Recife');
+# Iniciando SESSÃO:
 session_start();
 
 // Arrays/ Variaveis:
@@ -26,7 +28,7 @@ catch(PDOException $e){
 # Pegar os valores e forma um array do objeto Tbteste: FUNCIONANDO
 foreach($array_tb as $consulta){
     #ADD OS OBJETOS NO NA LISTA: Tenho que ir add os OBEJTOS no final da lista!
-    $lista_tabela[] = new Tabela($consulta['paciente'], $consulta['data_agendada']); 
+    $lista_tabela[] = new Tabela($consulta['paciente'], new DateTime($consulta['data_agendada'])); //MODIFICADO!
     
 }
 $_SESSION['tbLista'] = $lista_tabela;

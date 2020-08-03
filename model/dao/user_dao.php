@@ -1,18 +1,8 @@
 <?php
 # Script de acesso ao banco para metodos do usuario:
+session_start();
 
-// Colocar try-catch na chamada da Funcao: FUNCIONANDO *Tirar esse metodo daqui depois
-function bd_conectar(){
-    // Variaveis de conexao
-    $dns = 'mysql:host=localhost;dbname=test';
-    $user = 'root';
-    $senha = null; 
-
-    $conexao = new PDO($dns, $user, $senha);
-    return $conexao;
-}
-
-    // Consultando os usuarios!
+// Consultando os usuarios!
 function bd_consultarUsuarios($conexao){
     $sql = 'SELECT * FROM usuario';
     $resultado = $conexao->query($sql);

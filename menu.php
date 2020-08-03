@@ -62,7 +62,7 @@ if(!$_SESSION['validacao']){
               <a clas="list-group-item" href="./teste_tb.php"> Vizualizar tabela de agendametnos</a>  
             </li>
             <li class="list-group-item">
-              <a clas="list-group-item" href="#"> Agendar atendimento </a>
+              <a clas="list-group-item" href="cad_atendimento.php"> Agendar atendimento </a>
             </li>
             <!-- ARRUMAR ISSO --> 
             <li class="list-group-item">
