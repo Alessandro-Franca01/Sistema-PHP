@@ -1,6 +1,11 @@
 <?php
 // Implementando a logica de persistencia da tabela de agendamento
 
+include('./model/dao/paciente_dao.php');
+include('./model/dao/conexao_novo_dao.php'); 
+
+session_start();
+
 ?>
 
 <html>
@@ -17,7 +22,7 @@
 
     <script>
         function acao(){
-            alert('Paciente cadastrado!')
+          alert('Paciente Cadastrado')
         }
     </script>
 
@@ -40,7 +45,7 @@
       </a>
     </nav>
 
-    <form action="#">
+    <form action="./controll/validacao_cad_paciente.php" method="post">
     <div class="form-group">
         <label for="nome_paciente">Paciente</label>
         <input type="text" class="form-control" id="nome_paciente" placeholder="Nome e Sobre Nome">

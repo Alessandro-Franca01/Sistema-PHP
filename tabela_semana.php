@@ -7,83 +7,8 @@
     
     session_start();
 
-    // Data gerada pelo usuario:
+    // Data gerada pelo usuario: Na pratica
     $data = ' 2020-07-20';
-
-    # TODAS AS FUNÇÕES USADAS CRIADAS NESSE SCRIPT:
-
-    # Funcionando corretamente! 
-    function horario($hora){
-      echo "<tr>
-              <td>{$hora}:00</td>
-              <td>DISPONIVEL</td>
-              <td>DISPONIVEL</td>
-              <td>DISPONIVEL</td>
-              <td>DISPONIVEL</td>
-              <td>DISPONIVEL</td>
-              <td>DISPONIVEL</td>
-            </tr>";
-    }
-
-    # Funcionando corretamente!
-    function horario2($hora){
-      echo "<tr>";
-          for ($i = 0; $i <= 5; $i++) {
-            if($i == 0){
-              echo "<td>".$hora.":00</td>";
-            }
-            // chamar uma função aqui : resultado seria o objeto correto!
-            // Depois imprimia o nome do objeto dentro do echo!
-            echo "<td>DISPONIVEL</td>";
-          }
-      echo "</tr>";
-    }
-
-    // Gerar os horarios da semana: resultado um array com todos os horarios de cada dia da semana"COMPLETO"
-    function gerarHorariosSemana($dias_semana){
-      $horarios_semana = array();
-      for($i = 0; $i <= 5; $i++){
-        $horarios_semana[] = gerarHorarios($dias_semana[$i], 8, 21);
-      }
-      return $horarios_semana;
-    }
-
-    // Gerar os objetos com as datas geradas: posso entrar com uma lista de horarios/Dia
-    function gerarObjTabela($array_horarios){
-      $lista_tabela = array();
-      foreach($array_horarios as $horario){
-        $lista_tabela[] = new Tabela("DISPONIVEL", $horario); // add todos os objetos
-      }
-      return $lista_tabela;
-    }
-
-    // Comparando duas listas de objetos: compara as listas e gerar uma nova lista com os objetos iguais: FUNCIONANDO!
-    function compararObjTabela($lista_banco, $lista_pagina){
-      $lista_comparada = array(); 
-      $cont = 0;
-      foreach($lista_banco as $objBdTable){
-        # Esta entrando no IF: Funcionando!
-        foreach($lista_pagina as $objPgTble){
-          if($objBdTable->__get("data_hora") == $objPgTble->__get("data_hora")){          
-            array_push($lista_comparada, $objBdTable);
-          }else{ 
-            // echo "Entrou no ELSE";
-          }
-        }
-        
-      }
-      return $lista_comparada;
-    }
-
-    // Gerar um array com todos os objetos Table da semana 
-    function gerarAllObjsTable($all_horarios){
-      $lista_tabela = array();
-      // vou entrar no array do dia, dentro dele vou dá um for ou chamar a outra função!
-      foreach($all_horarios as $dia){
-        $lista_tabela[] = gerarObjTabela($dia);
-      }
-      return $lista_tabela;
-    }
 
     # Recebendo o array atendimentos do banco de dados
     //***Lembrar de tirar essa negação!
@@ -102,22 +27,54 @@
     
 
     // Objetos da tabela semana:
-    $array_horarios_semana = gerarHorariosSemana($semana);
-    $objetos_tb_completo = gerarAllObjsTable($array_horarios_semana); // Está dando errado, Criar outra funçao!!
+    //$array_horarios_semana = gerarHorariosSemana($semana);
+    //$objetos_tb_completo = gerarAllObjsTable($array_horarios_semana); // Está dando errado, Criar outra funçao!!
 
     // Comparando as Listas: FUNCIONADO
     $array_comparacao = compararObjTabela($_SESSION['tbLista'], $array_teste_tabela);
 
-    // TESTAR FUNCAO PARA GERAR LINHA DA TABELA: FUNCIONANDO
+    // GERANDO TODAS AS LINHAS DA TABELA: MANUALMENTE!
     $array_linha_8h = gerarLinha(8, $semana); 
-    $array_linha_9h = gerarLinha(9, $semana); 
+    $array_linha_9h = gerarLinha(9, $semana);
+    $array_linha_10h = gerarLinha(10, $semana); 
+    $array_linha_11h = gerarLinha(11, $semana);
+    $array_linha_12h = gerarLinha(12, $semana); 
+    $array_linha_13h = gerarLinha(13, $semana);
+    $array_linha_14h = gerarLinha(14, $semana); 
+    $array_linha_15h = gerarLinha(15, $semana);
+    $array_linha_16h = gerarLinha(16, $semana); 
+    $array_linha_17h = gerarLinha(17, $semana);
+    $array_linha_18h = gerarLinha(18, $semana); 
+    $array_linha_19h = gerarLinha(19, $semana); 
+    $array_linha_20h = gerarLinha(20, $semana);
+    $array_linha_21h = gerarLinha(21, $semana); 
+    $array_linha_22h = gerarLinha(22, $semana); 
 
-    // Gerando os objetos da tabela:
+    // Gerando os objetos da tabela: MANUALMENTE!  TESTANDO TUDO...
     $objetos_linha_8h = gerarObjTabela($array_linha_8h);
     $objetos_linha_9h = gerarObjTabela($array_linha_9h);
+    $objetos_linha_10h = gerarObjTabela($array_linha_10h); 
+    $objetos_linha_11h = gerarObjTabela($array_linha_11h);
+    /*$objetos_linha_12h = gerarObjTabela($array_linha_9h); 
+    $objetos_linha_13h = gerarObjTabela($array_linha_9h);
+    $objetos_linha_14h = gerarObjTabela($array_linha_9h); 
+    $objetos_linha_15h = gerarObjTabela($array_linha_9h);
+    $objetos_linha_16h = gerarObjTabela($array_linha_9h); 
+    $objetos_linha_17h = gerarObjTabela($array_linha_9h);
+    $objetos_linha_18h = gerarObjTabela($array_linha_9h); 
+    $objetos_linha_19h = gerarObjTabela($array_linha_9h); 
+    $objetos_linha_20h = gerarObjTabela($array_linha_9h);
+    $objetos_linha_21h = gerarObjTabela($array_linha_9h); 
+    $objetos_linha_22h = gerarObjTabela($array_linha_9h); */
 
-    # Imprimindo a lista completa dos horarios da semana
-    #print_r($array_comparacao);
+    // Testar nova funçao de gerar todas as linhas da semana:
+    $all_linhas_tabela = gerarArrayDeLinhas(8, 22, $semana); // FUNCIONANDO NORMALMENTE!
+    $all_obj_tables = gerarAllObjsTable($all_linhas_tabela); // FUNCIONANDO NORMALMENTE!
+    #print_r($all_obj_tables);
+
+    # Imprimindo listas:
+    //print_r($_SESSION['tbLista']); # Veio todas os atendimentos do banco, depois tenho que ajustar isso!
+    //echo '<hr>';
 
 ?>
 
@@ -164,24 +121,9 @@
             <!-- Cada linha vai ser uma funcao php -->
               <?php horario3(8, $objetos_linha_8h, $_SESSION['tbLista']) # FUNCIONANDO ?>
               <?php horario3(9, $objetos_linha_9h, $_SESSION['tbLista']) # FUNCIONANDO ?>
-              <tr>
-                <td>10:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>11:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
+              <?php horario3(10, $objetos_linha_10h, $_SESSION['tbLista']) # FUNCIONANDO ?>
+              <?php horario3(11, $objetos_linha_11h, $_SESSION['tbLista']) # FUNCIONANDO ?>
+              
               <tr>
                 <td>12:00</td>
                 <td>DISPONIVEL</td>

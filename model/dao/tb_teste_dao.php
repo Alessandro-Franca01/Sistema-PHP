@@ -1,12 +1,12 @@
 <?php
 # Esse Script vai ser para acessar todos os metodos relacionados a Tabela Semanal
 
-// Essa funcao vai se conectar ao banco de dados 'test' e retorna um objeto PDO
+// Essa funcão não é para estar aqui!
 function bd_conectar(){
     // Variaveis de conexao
     $dns = 'mysql:host=localhost;dbname=test';
     $user = 'root';
-    $senha = null; # Nao lembro de ter criado senha
+    $senha = null; 
 
     $conexao = new PDO($dns, $user, $senha);
     return $conexao;

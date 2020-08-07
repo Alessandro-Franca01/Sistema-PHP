@@ -1,18 +1,24 @@
 <?php
-# CLASSE DE ATENDIMENTO NO MOMENTO NAO ESTA SENDO NECESSARIA
+# CLASSE DE ATENDIMENTO 
 
-// Nessa classe posso colocar todos os dados do atendimento incluindo a data
+// Classe atualizada:
 class Atendimento {
 
     private $idAtendimento = null;
     private $valor = null;
-    private $atend_obd = null;
+    private $observacao = null;
+    private $data_atendimento = null; // DateTime
+    private $id_usuario = null;
+    private $id_paciente = null;
 
     //Metodo construtor da classe passando o id como parametro: FUNCIONANDO!
-    function __construct($id, $valor, $obs){
+    function __construct($id, $valor, $data, $obs, $id_usuario, $id_paciente){
         $this->idAtendimento = $id;
         $this->valor = $valor;
-        $this->atend_obd = $obs;
+        $this->data_atendimento = $data;
+        $this->observacao = $obs;
+        $this->id_usuario = $id_usuario;
+        $this->id_paciente = $id_paciente;
     }
 
     // Unico set e get generico:

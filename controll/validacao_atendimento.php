@@ -1,14 +1,16 @@
 <?php
 # SCRIPT DE VALIDAÇÃO DAS REQUISIÇÕES DE ATENDIMENTO
 
-session_start();
-
 //  Includes:
-include('../model/dao/conexao_dao.php');
-include('../model/dao/paciente_dao.php'); 
+include('../model/dao/conexao_novo_dao.php'); 
+include('../model/dao/paciente_dao.php');
+include('../model/dao/atendimento_dao.php');
 include('../model/Usuario.php');
 include('../model/paciente.php');
 include('../model/atendimento.php');
+
+// Iniciando a sessao:
+session_start();
 
 if(!$_SESSION['validacao']){
   header('Location: ./index.php?erro=user_nao_logado');
@@ -17,13 +19,16 @@ if(!$_SESSION['validacao']){
 // Recuperando valores do metodo POST 
 $nome_paciente = $_POST['paciente_atend'];
 $valor = $_POST['valor'];
-$horario = $_POST['horario_atend'];
+$horario = $_POST['horario_atend'].':00'; // Concatenando para o formato com os segundos
 $data_atend = $_POST['data_atend'];
 $obsercao = $_POST['obs_atend'];
+// Data no formato sql:
+$data = $data_atend.' '.$horario;
 
 // array de paciente:
 $array_paciente = array();
 $validar_paciente = false;
+$usuario = $_SESSION['usuario']; 
 $paciente = null;
 
 try{
@@ -34,18 +39,26 @@ try{
     $validar_paciente = true;
     $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'], $array_paciente[0]['data_nasc']);
     $paciente->toString();
+    echo '<br>';
+    print_r($_POST);
+    echo "<br> data formato sql: $data";
+    echo '<br>';
+    print_r($_SESSION['usuario']); 
+
   }
+  // Instaciando o Atendimento: FUNCIONANDO!!!!
+  $atendimento = new Atendimento(null, $valor, $data, $obsercao, $usuario->__get('id'), $paciente->__get('idPaciente'));
+  $resultado_query = inserirAtendimento($conexao, $atendimento); // FUNCIONANDO!!!!
+  echo '<br>Linhas afetadas:'.$resultado_query;
+  
 }
 catch(PDOException $e){
   echo "Erro: ".$e->getCode();
   echo "<br>Messagem: ".$e->getMessage();
-}// USAR O FINALLY PARA FECHAR A CONEXAO E CRIAR A FUNCAO DE ENCERRAR CONEXAO
+}
 
 
-# EXEMPLO DE INSERTS DO BANCO DE DADOS:
-// INSERT INTO agendamento(IDAgendamento, data_marcada, observacao) VALUES(2,'2020-07-20 20:00:00', null);
 
-//INSERT INTO atendimento(valor, observacao, ID_Usuario, ID_Paciente, ID_Agendamento) VALUES(80.00, null, 2, 1, 2);
 
 
 
