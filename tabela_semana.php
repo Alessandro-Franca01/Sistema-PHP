@@ -2,7 +2,7 @@
     # ESSA PAGINA VAI SER PARA TESTAR A TABELA DE AGENDAMENTO, TENHO QUE ORGANIZAR ESSA PAGINA DEPOIS!
 
     // Começar a implementar a funcionalidade de VISUALIZAR SEMANA
-    require('./model/tb_teste.php');
+    require('./model/table.php');
     require('./model/funcoes_data.php');
     
     session_start();
@@ -19,7 +19,7 @@
 
     // Funcao gera os horarios de um dia:
     # Essa data vai ser colocada pelo o usuario
-    $semana = gerarSemana(new DateTime('2020-07-20')); # Fiz um alteração no espaçamente inicial: entrar com a $data
+    $semana = gerarSemana(new DateTime($data)); # Fiz um alteração no espaçamente inicial: entrar com a $data
     $lista_horarios = gerarHorarios($semana[0], 8, 21);
     
     // Resultado: lista de objetos Table de um unico
@@ -50,31 +50,27 @@
     $array_linha_21h = gerarLinha(21, $semana); 
     $array_linha_22h = gerarLinha(22, $semana); 
 
-    // Gerando os objetos da tabela: MANUALMENTE!  TESTANDO TUDO...
+    // Gerando os objetos da tabela: AUTOMATIZA DEPOIS!
     $objetos_linha_8h = gerarObjTabela($array_linha_8h);
     $objetos_linha_9h = gerarObjTabela($array_linha_9h);
     $objetos_linha_10h = gerarObjTabela($array_linha_10h); 
     $objetos_linha_11h = gerarObjTabela($array_linha_11h);
-    /*$objetos_linha_12h = gerarObjTabela($array_linha_9h); 
-    $objetos_linha_13h = gerarObjTabela($array_linha_9h);
-    $objetos_linha_14h = gerarObjTabela($array_linha_9h); 
-    $objetos_linha_15h = gerarObjTabela($array_linha_9h);
-    $objetos_linha_16h = gerarObjTabela($array_linha_9h); 
-    $objetos_linha_17h = gerarObjTabela($array_linha_9h);
-    $objetos_linha_18h = gerarObjTabela($array_linha_9h); 
-    $objetos_linha_19h = gerarObjTabela($array_linha_9h); 
-    $objetos_linha_20h = gerarObjTabela($array_linha_9h);
-    $objetos_linha_21h = gerarObjTabela($array_linha_9h); 
-    $objetos_linha_22h = gerarObjTabela($array_linha_9h); */
+    $objetos_linha_12h = gerarObjTabela($array_linha_12h); 
+    $objetos_linha_13h = gerarObjTabela($array_linha_13h);
+    $objetos_linha_14h = gerarObjTabela($array_linha_14h); 
+    $objetos_linha_15h = gerarObjTabela($array_linha_15h);
+    $objetos_linha_16h = gerarObjTabela($array_linha_16h); 
+    $objetos_linha_17h = gerarObjTabela($array_linha_17h);
+    $objetos_linha_18h = gerarObjTabela($array_linha_18h); 
+    $objetos_linha_19h = gerarObjTabela($array_linha_19h); 
+    $objetos_linha_20h = gerarObjTabela($array_linha_20h);
+    $objetos_linha_21h = gerarObjTabela($array_linha_21h); 
+    //$objetos_linha_22h = gerarObjTabela($array_linha_22h); 
+    
 
     // Testar nova funçao de gerar todas as linhas da semana:
-    $all_linhas_tabela = gerarArrayDeLinhas(8, 22, $semana); // FUNCIONANDO NORMALMENTE!
-    $all_obj_tables = gerarAllObjsTable($all_linhas_tabela); // FUNCIONANDO NORMALMENTE!
-    #print_r($all_obj_tables);
-
-    # Imprimindo listas:
-    //print_r($_SESSION['tbLista']); # Veio todas os atendimentos do banco, depois tenho que ajustar isso!
-    //echo '<hr>';
+    #$all_linhas_tabela = gerarArrayDeLinhas(8, 22, $semana); // FUNCIONANDO NORMALMENTE!
+    #$all_obj_tables = gerarAllObjsTable($all_linhas_tabela); // FUNCIONANDO NORMALMENTE!
 
 ?>
 
@@ -118,103 +114,22 @@
               </tr>
             </thead>
             <tbody>
-            <!-- Cada linha vai ser uma funcao php -->
-              <?php horario3(8, $objetos_linha_8h, $_SESSION['tbLista']) # FUNCIONANDO ?>
-              <?php horario3(9, $objetos_linha_9h, $_SESSION['tbLista']) # FUNCIONANDO ?>
-              <?php horario3(10, $objetos_linha_10h, $_SESSION['tbLista']) # FUNCIONANDO ?>
-              <?php horario3(11, $objetos_linha_11h, $_SESSION['tbLista']) # FUNCIONANDO ?>
+            <!-- Cada funcao vai ler uma linha da tabela: FUNCIONANDO NORMALMENTE -->
+              <?php horario3(8, $objetos_linha_8h, $_SESSION['tbLista']) ?>
+              <?php horario3(9, $objetos_linha_9h, $_SESSION['tbLista']) ?>
+              <?php horario3(10, $objetos_linha_10h, $_SESSION['tbLista']) ?>
+              <?php horario3(11, $objetos_linha_11h, $_SESSION['tbLista']) ?>
+              <?php horario3(12, $objetos_linha_12h, $_SESSION['tbLista']) ?>
+              <?php horario3(13, $objetos_linha_13h, $_SESSION['tbLista']) ?>
+              <?php horario3(14, $objetos_linha_14h, $_SESSION['tbLista']) ?>
+              <?php horario3(15, $objetos_linha_15h, $_SESSION['tbLista']) ?>
+              <?php horario3(16, $objetos_linha_16h, $_SESSION['tbLista']) ?>
+              <?php horario3(17, $objetos_linha_17h, $_SESSION['tbLista']) ?>
+              <?php horario3(18, $objetos_linha_18h, $_SESSION['tbLista']) ?>
+              <?php horario3(19, $objetos_linha_19h, $_SESSION['tbLista']) ?>
+              <?php horario3(20, $objetos_linha_20h, $_SESSION['tbLista']) ?>
+              <?php horario3(21, $objetos_linha_21h, $_SESSION['tbLista']) ?>
               
-              <tr>
-                <td>12:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>13:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>14:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>15:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>16:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>17:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>18:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>19:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>20:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>
-              <tr>
-                <td>21:00</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-                <td>DISPONIVEL</td>
-              </tr>              
-              <?php horario2(22) ?>
             </tbody>
             <tfoot class="thead-dark">
                 <tr>

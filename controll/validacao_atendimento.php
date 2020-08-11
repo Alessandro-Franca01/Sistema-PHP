@@ -1,5 +1,5 @@
 <?php
-# SCRIPT DE VALIDAÇÃO DAS REQUISIÇÕES DE ATENDIMENTO
+# SCRIPT DE VALIDAÇÃO DAS REQUISIÇÕES DE ATENDIMENTO: ALTERAÇÃO NA CLASSE PACIENTE VERIFICAR NOVAMENTE!!! 
 
 //  Includes:
 include('../model/dao/conexao_novo_dao.php'); 
@@ -23,32 +23,34 @@ $horario = $_POST['horario_atend'].':00'; // Concatenando para o formato com os 
 $data_atend = $_POST['data_atend'];
 $obsercao = $_POST['obs_atend'];
 // Data no formato sql:
-$data = $data_atend.' '.$horario;
+$data_sql = $data_atend.' '.$horario; // Testar ainda!
 
-// array de paciente:
+// Variaveis e arrays:
 $array_paciente = array();
 $validar_paciente = false;
 $usuario = $_SESSION['usuario']; 
 $paciente = null;
+$resultado_query = null; //Depois vou implementar a logica desse valor!
 
 try{
   $conexao = bd_conectar();
-  // is_array() não dá certo, usano o isset() passando a posição 0
-  $array_paciente = bdConsultarPaciente($conexao, $nome_paciente); // SEM TRATAMENTO DE DADOS
+  $array_paciente = bdConsultarPaciente($conexao, $nome_paciente); 
   if(isset($array_paciente[0])){ // Arrumar isso aqui depois!!!
     $validar_paciente = true;
-    $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'], $array_paciente[0]['data_nasc']);
+    $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'], $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone']);
     $paciente->toString();
     echo '<br>';
     print_r($_POST);
-    echo "<br> data formato sql: $data";
+    echo "<br> data formato sql: $data_sql";
     echo '<br>';
     print_r($_SESSION['usuario']); 
 
   }
+
+
   // Instaciando o Atendimento: FUNCIONANDO!!!!
-  $atendimento = new Atendimento(null, $valor, $data, $obsercao, $usuario->__get('id'), $paciente->__get('idPaciente'));
-  $resultado_query = inserirAtendimento($conexao, $atendimento); // FUNCIONANDO!!!!
+  $atendimento = new Atendimento(null, $valor, $data_sql, $obsercao, $usuario->__get('id'), $paciente->__get('idPaciente'));
+  $resultado_query = inserirAtendimento($conexao, $atendimento); 
   echo '<br>Linhas afetadas:'.$resultado_query;
   
 }

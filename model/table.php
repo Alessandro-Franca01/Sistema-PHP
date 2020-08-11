@@ -1,5 +1,5 @@
 <?php
-# AJUSTAR ESSA MODELAGEM PARA MELHORAR O MAPEAMENTO:
+# Classe Table, é cada unidades da tabela
 class Tabela {
     public $paciente = "DISPONIVEL";
     public $data_hora = null; // Esse atributo é uma composição do objeto DateTime ou só o tipo date!

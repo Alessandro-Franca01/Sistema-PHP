@@ -76,7 +76,7 @@ if(!$_SESSION['validacao']){
       <!-- Usar o campo de seleção para escolher o horario: retirando o js = onclick="acao()"  -->
       <div class="form-group">
           <label for="data_atendimento">Data do Atendimento</label>
-          <input type="date" name ="data_atend"class="form-control" id="data_atendimento">
+          <input type="date" name ="data_atend" class="form-control" id="data_atendimento">
       </div>
       <div class="form-group">
           <label for="obs_agendamento">Observações</label>

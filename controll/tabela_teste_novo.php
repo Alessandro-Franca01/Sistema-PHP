@@ -1,8 +1,8 @@
 <?php
 # Testando conuslta ao banco para a pagunda de tabela semanal
-include('./model/tb_teste.php');
-include('./model/dao/conexao_novo_dao.php');
-require('./model/dao/tabela_dao.php');
+include('../model/table.php');
+include('../model/dao/conexao_novo_dao.php');
+require('../model/dao/tabela_dao.php');
 
 # Definindo TimeZone:
 date_default_timezone_set('America/Recife');
@@ -35,9 +35,9 @@ $_SESSION['tbLista'] = $lista_tabela;
 
 // Redirecionamento: Para redirecionar 'parece' que não pode haver nenhum echo ou print na pagina *PESQUISAR MAIS!
 if($redirecionamento){
-    header('Location: tabela_semana.php');
+    header('Location: ../tabela_semana.php');
 }else{
-    header('Location: index.php');
+    header('Location: ../index.php');
 }
 
 

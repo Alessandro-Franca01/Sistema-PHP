@@ -5,21 +5,26 @@
 function bdConsultarPaciente($conexao, $nome_paciente){
     $sql = "SELECT * FROM paciente WHERE nome = '{$nome_paciente}'";
     $resultado = $conexao->query($sql);
-    # Recebendo somento array associativo: fetchAll(PDO::FETCH_ASSOC); TESTAR AINDA!!!
     # Recebendo somente objeto: fetchAll(PDO::FETCH_OBJ)
     $consulta = $resultado->fetchAll(); 
     return $consulta;
 }
 
-// Inserir um registro do paciente no banco de dados: AJUSTAR!
-function bdInserirPaciente($conexao){
-    //INSERT INTO usuario(nome, email, senha) VALUES('ALESSANDRO FRANCA', 'ALE@GMAIL.COM', 'ALE123');
-    #$sql = "INSERT INTO usuario(nome, email, senha) VALUES('ALISSON FRANCA', 'ALISSON@GMAIL', 'ALI123')";
-    $resultado = null;
-    #$resultado = $conexao->exec($sql); // TBM NAO FOI DO MESMO JEITO DO OUTRO!
-    //$stm = $conexao->prepare($sql);
-    //$resultado = $stm->execute();
-    return $resultado;
+// Funcao de consulta passando email e nome completo: FUNCIONANDO NORMALMENTE!
+function bdConsultarPacienteCompleta($conexao, $email, $nome_paciente){
+    $sql = "SELECT* FROM paciente WHERE (nome = '{$nome_paciente}' AND email = '{$email}')";
+    $resultado = $conexao->query($sql);
+    $consulta = $resultado->fetchAll(PDO::FETCH_ASSOC); 
+    return $consulta; 
+}
+
+// Inserir um registro de paciente no banco de dados: TESTAR!
+function bdInserirPaciente($conexao, $nome, $email, $data_nasc, $telefone){
+    $sql = "INSERT INTO paciente(nome, email, data_nasc, telefone )
+        VALUES('{$nome}', '{$email}', '{$data_nasc}','{$telefone}')";
+    $stm = $conexao->prepare($sql);
+    $resultado = $stm->execute();
+    return $resultado; // linhas afetadas
 }
 
 

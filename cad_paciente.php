@@ -6,6 +6,11 @@ include('./model/dao/conexao_novo_dao.php');
 
 session_start();
 
+// Posso fazer uma logica aqui para caso o paciente já exista no banco de dados:
+if(isset($_GET['consulta_pct'])){
+  echo "GET recebido, Valor: {$_GET['consulta_pct']}";
+}
+
 ?>
 
 <html>
@@ -43,33 +48,32 @@ session_start();
         <img src="./img/inc_form_paciente.png" width="30" height="30" >
         Cadastro de Paciente
       </a>
-    </nav>
-
+      </nav>
     <form action="./controll/validacao_cad_paciente.php" method="post">
     <div class="form-group">
-        <label for="nome_paciente">Paciente</label>
-        <input type="text" class="form-control" id="nome_paciente" placeholder="Nome e Sobre Nome">
+        <label for="cad_pct_nome">Paciente</label>
+        <input type="text" class="form-control" name="cad_pct_nome" id="cad_pct_nome" placeholder="Nome e Sobre Nome">
         <small id="small_pacinete" class="form-text text-muted">*Não use preposições tipo: de,da,do </small>
     </div>
     <div class="form-group">
-        <label for="tx_reponsavel">Responsável</label>
-        <input type="text" class="form-control" id="nome_repon" placeholder="Primeiro Nome">
+        <label for="cad_pct_responsavel">Responsável</label>
+        <input type="text" class="form-control" name="cad_pct_responsavel" id="cad_pct_responsavel" placeholder="Primeiro Nome">
         <small id="help_respon" class="form-text text-muted">*Campo não obrigatorio </small>
     </div>
     <div class="form-group">
-        <label for="tx_reponsavel">Telefone</label>
-        <input type="text" class="form-control" id="nome_repon" placeholder="Telefone ou Celular">
+        <label for="cad_pct_telefone">Telefone</label>
+        <input type="text" class="form-control" name="cad_pct_telefone" id="cad_pct_telefone" placeholder="Telefone ou Celular">
         <small id="small_telefone" class="form-text text-muted">*Campo não obrigatorio </small>
     </div>
     <div class="form-group">
-        <label for="email_paciente">Email</label>
-        <input type="email" class="form-control" id="email_paciente" aria-describedby="help_email_pc" placeholder="Email do Paciente">
+        <label for="cad_pct_email">Email</label>
+        <input type="email" class="form-control" name="cad_pct_email" id="cad_pct_email" aria-describedby="help_email_pc" placeholder="Email do Paciente">
         <small id="help_email_pc" class="form-text text-muted">*Campo não obrigatorio </small>
     </div>
     <!-- Testar o input tipo data com bootstrap -->
     <div class="form-group">
         <label for="data_nasc">Data de Nascimento</label>
-        <input type="date" class="form-control" id="data_nasc">
+        <input type="date" class="form-control" name="cad_pct_data_nasc" id="data_nasc">
     </div>
     <button onclick="acao()" type="submit" class="btn btn-primary">Enviar</button>
     <button type="reset" class="btn btn-secundary">Cancelar</button>
