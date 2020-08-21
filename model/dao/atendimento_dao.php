@@ -12,6 +12,20 @@ function inserirAtendimento($conexao, $atendimento){
     return $resultado;
 }
 
+# Funcao para verificar se um atendimento existe: FUNCIONANDO!!
+function consultarAtendimento($conexao, $data){
+$sql = "SELECT* FROM atendimento WHERE data_atendimento = '{$data}'";
+    $resultado = $conexao->query($sql);
+    $consulta = $resultado->fetchAll(PDO::FETCH_ASSOC); 
+    return $consulta; 
+}
+
+# Funcao para remover um atendimento: FUNCIONANDO!
+function removerAtendimento($conexao, $atendimento){
+    $sql = "DELETE FROM atendimento WHERE data_atendimento = '{$atendimento->__get('data_atendimento')}'";
+    $stm = $conexao->prepare($sql);
+    $resultado = $stm->execute(); 
+    return $resultado;
+}
+
 ?>
-
-

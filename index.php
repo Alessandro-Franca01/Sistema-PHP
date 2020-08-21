@@ -23,6 +23,13 @@ if(!isset($_GET['login']) ){
     <!-- Deixar essa pagina responsiva, baixa o bootstrap para usar o diretorio salvo -->    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+    <script>
+      // Começar a implementação dos codigos em java script na aplicação:
+        function validacao(){
+          
+        }
+    </script>
+
     <style>
       .card-login {
         padding: 30px 0 0 0;

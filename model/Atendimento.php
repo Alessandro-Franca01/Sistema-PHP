@@ -12,7 +12,7 @@ class Atendimento {
     private $id_paciente = null;
 
     //Metodo construtor da classe passando o id como parametro: FUNCIONANDO!
-    function __construct($id, $valor, $data, $obs, $id_usuario, $id_paciente){
+    function __construct($id, $valor, $obs, $data, $id_usuario, $id_paciente){
         $this->idAtendimento = $id;
         $this->valor = $valor;
         $this->data_atendimento = $data;

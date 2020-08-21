@@ -23,33 +23,32 @@ $horario = $_POST['horario_atend'].':00'; // Concatenando para o formato com os 
 $data_atend = $_POST['data_atend'];
 $obsercao = $_POST['obs_atend'];
 // Data no formato sql:
-$data_sql = $data_atend.' '.$horario; // Testar ainda!
+$data_sql = $data_atend.' '.$horario; 
 
 // Variaveis e arrays:
 $array_paciente = array();
 $validar_paciente = false;
 $usuario = $_SESSION['usuario']; 
 $paciente = null;
-$resultado_query = null; //Depois vou implementar a logica desse valor!
+$resultado_query = null;
 
 try{
   $conexao = bd_conectar();
   $array_paciente = bdConsultarPaciente($conexao, $nome_paciente); 
-  if(isset($array_paciente[0])){ // Arrumar isso aqui depois!!!
+  if(isset($array_paciente[0])){ 
     $validar_paciente = true;
     $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'], $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone']);
     $paciente->toString();
     echo '<br>';
     print_r($_POST);
     echo "<br> data formato sql: $data_sql";
-    echo '<br>';
-    print_r($_SESSION['usuario']); 
-
+    echo '<br>ID Usuario:';
+    echo $_SESSION['id_user'];
   }
 
 
-  // Instaciando o Atendimento: FUNCIONANDO!!!!
-  $atendimento = new Atendimento(null, $valor, $data_sql, $obsercao, $usuario->__get('id'), $paciente->__get('idPaciente'));
+  // Instaciando o Atendimento:
+  $atendimento = new Atendimento(null, $valor, $obsercao, $data_sql, $usuario->__get('id'), $paciente->__get('idPaciente'));
   $resultado_query = inserirAtendimento($conexao, $atendimento); 
   echo '<br>Linhas afetadas:'.$resultado_query;
   

@@ -86,20 +86,33 @@
 
     <!-- Bootstrap CSS *<div class="container-fluid bg-dark">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
 
-  <body class = "container-fluid bg-light">
+    <script>
     
-      <div class="row">
-          <nav class="navbar navbar-light bg-light">
-              <a class="navbar-brand" href="#">
-                <img src="./img/inc_form_atendimento.jpg" width="30" height="30">
-                Agendamentos
-              </a>
-            </nav>
-        </div>
+        function acao(){
+          //alert('Paciente Cadastrado')
+          
+        }
+    </script>
 
-      <div class ="row">
+  </head>
+  
+  <body class = "bg-light">
+    
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+          <img src="./img/inc_form_atendimento.jpg" width="30" height="30">
+          Agendamentos
+        </a>
+        <!-- FUNCIONANDO PORÉM TEM QUE AJEITAR AGUMAS COISAS -->
+        <button class="btn btn-outline-secondary" onclick="print()" type="submit">Imprimir</button>
+
+        <form action="./menu.php">
+          <button class="btn btn-outline-secondary" type="submit">Voltar ao Menu</button>
+        </form>
+    </nav>
+
+      <div>
 
           <table class="table">
             <thead class="thead-dark">

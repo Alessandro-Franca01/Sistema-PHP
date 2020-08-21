@@ -37,6 +37,7 @@ foreach($array_users as $user){
         $user_logado = new Usuario($user['IDUsuario'], $user['nome'], $user['email'], $user['senha']);
         //Passando o objeto!
         $_SESSION['usuario'] = $user_logado;
+        $_SESSION['id_user'] = $user['IDUsuario']; // para nao ter que passar um objeto de usuario para o dao.
     }
     else{
         echo "Passando pelo ELSE...<br>";

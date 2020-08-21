@@ -10,7 +10,7 @@ function bdConsultarPaciente($conexao, $nome_paciente){
     return $consulta;
 }
 
-// Funcao de consulta passando email e nome completo: FUNCIONANDO NORMALMENTE!
+// Funcao de consulta: vou mudar depois para passar nome e data de nascimento
 function bdConsultarPacienteCompleta($conexao, $email, $nome_paciente){
     $sql = "SELECT* FROM paciente WHERE (nome = '{$nome_paciente}' AND email = '{$email}')";
     $resultado = $conexao->query($sql);

@@ -6,8 +6,6 @@ include_once('../model/paciente.php');
 
 session_start();
 
-
-
 // Variaveis do POST:
 $paciente_nome = $_POST['cad_pct_nome'];
 $responsavel = $_POST['cad_pct_responsavel'];
@@ -19,7 +17,6 @@ $email = $_POST['cad_pct_email'];
 // Variaveis e Arrays:
 $redirecionamento = null;
 $novo_paciente = null;
-
 
 try{
     $conexao = bd_conectar();

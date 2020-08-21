@@ -48,6 +48,9 @@ if(isset($_GET['consulta_pct'])){
         <img src="./img/inc_form_paciente.png" width="30" height="30" >
         Cadastro de Paciente
       </a>
+      <a href="./menu.php">
+        <button class="btn btn-outline-secondary" type="button">Voltar ao Menu</button>
+      </a>
       </nav>
     <form action="./controll/validacao_cad_paciente.php" method="post">
     <div class="form-group">

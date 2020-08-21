@@ -66,6 +66,9 @@ if(!$_SESSION['validacao']){
             <li class="list-group-item">
               <a clas="list-group-item" href="cad_atendimento.php"> Agendar atendimento </a>
             </li>
+            <li class="list-group-item">
+              <a clas="list-group-item" href="remover_atendimento.php"> Remover atendimento </a>
+            </li>            
             <!-- ARRUMAR ISSO --> 
             <li class="list-group-item">
               <a clas="list-group-item" href="./index.php?erro=logout"> Sair do sistema </a>
