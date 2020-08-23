@@ -19,11 +19,6 @@ if(!$_SESSION['validacao']){
  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script>
-        function acao(){
-            alert('Atendimento excluido!')
-        }
-    </script>
   </head>
 
   <body>
@@ -70,5 +65,31 @@ if(!$_SESSION['validacao']){
       <button type="reset" class="btn btn-secundary">Cancelar</button>
     </form>
 
+    <script>
+      // Script da mensaguem de validação: FUNCINONADO!
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        if (url.searchParams.get("atendimento") != null){
+          var getParamtroCadastro = url.searchParams.get("atendimento");
+
+          if(getParamtroCadastro == "removido"){
+            console.log(url); 
+            console.log(getParamtroCadastro);
+            alert("Atendimento REMOVIDO sucesso!");
+          }
+          if(getParamtroCadastro == "nao_removido"){ 
+            console.log(url); 
+            console.log(getParamtroCadastro);
+            alert("NÃO foi possével remover o atendimento.");
+          }
+          else{
+            // NÃO É PARA ENTRAR AQUI!
+            console.log(url); 
+            console.log(getParamtroCadastro);
+          }
+          
+        }
+        
+    </script>
   </body>
 </html>

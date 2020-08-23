@@ -37,7 +37,8 @@ try{
   $array_paciente = bdConsultarPaciente($conexao, $nome_paciente); 
   if(isset($array_paciente[0])){ 
     $validar_paciente = true;
-    $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'], $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone']);
+    $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'],
+                            $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone'], $array_paciente[0]['diagnostico']);
     $paciente->toString();
     echo '<br>';
     print_r($_POST);
@@ -50,7 +51,7 @@ try{
   // Instaciando o Atendimento:
   $atendimento = new Atendimento(null, $valor, $obsercao, $data_sql, $usuario->__get('id'), $paciente->__get('idPaciente'));
   $resultado_query = inserirAtendimento($conexao, $atendimento); 
-  echo '<br>Linhas afetadas:'.$resultado_query;
+  //echo '<br>Linhas afetadas:'.$resultado_query;
   
 }
 catch(PDOException $e){
@@ -58,6 +59,12 @@ catch(PDOException $e){
   echo "<br>Messagem: ".$e->getMessage();
 }
 
+// Logica de redirecionamento:
+if($resultado_query == 1){
+  header('Location: ../cad_atendimento.php?atendimento=efetuado');
+}else{
+  header('Location: ../cad_atendimento.php?atendimento=nao_efetuado');
+}
 
 
 

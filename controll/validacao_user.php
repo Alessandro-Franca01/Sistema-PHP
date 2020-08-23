@@ -1,7 +1,7 @@
 <?php
 # SCRIPT DAS OPERAÇÕES COM O USUARIO NO SISTEMA: tudo certo!
 
-include_once('../model/Usuario.php'); // Funcionando
+include_once('../model/Usuario.php'); 
 include('../model/dao/user_dao.php');
 include('../model/dao/conexao_novo_dao.php');
 
@@ -9,8 +9,8 @@ session_start();
 $_SESSION['usuario_logado'] = null;
 
 // Recuperando valores do metodo GET
-$emailLogin = $_GET['email'];
-$senhaLogin = $_GET["senha"];
+$emailLogin = $_POST['email'];
+$senhaLogin = $_POST["senha"];
 
 // Variavel de controle de validacao
 $var = false;

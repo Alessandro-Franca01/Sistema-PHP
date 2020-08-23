@@ -5,7 +5,6 @@
 function bdConsultarPaciente($conexao, $nome_paciente){
     $sql = "SELECT * FROM paciente WHERE nome = '{$nome_paciente}'";
     $resultado = $conexao->query($sql);
-    # Recebendo somente objeto: fetchAll(PDO::FETCH_OBJ)
     $consulta = $resultado->fetchAll(); 
     return $consulta;
 }
@@ -18,13 +17,21 @@ function bdConsultarPacienteCompleta($conexao, $email, $nome_paciente){
     return $consulta; 
 }
 
-// Inserir um registro de paciente no banco de dados: TESTAR!
-function bdInserirPaciente($conexao, $nome, $email, $data_nasc, $telefone){
-    $sql = "INSERT INTO paciente(nome, email, data_nasc, telefone )
-        VALUES('{$nome}', '{$email}', '{$data_nasc}','{$telefone}')";
+// Inserir um registro de paciente no banco de dados: MUDAR PARA OO ESSE PAREMETRO
+function bdInserirPaciente($conexao, $nome, $email, $data_nasc, $telefone, $diagnostico, $responsavel){
+    $sql = "INSERT INTO paciente(nome, email, data_nasc, telefone, diagnostico, responsavel)
+        VALUES('{$nome}', '{$email}', '{$data_nasc}','{$telefone}','{$diagnostico}','{$responsavel}')";
     $stm = $conexao->prepare($sql);
     $resultado = $stm->execute();
-    return $resultado; // linhas afetadas
+    return $resultado; 
+}
+
+// Consultar todos os pacientes: Funcionando
+function bdConsultarTodosPacientes($conexao){
+    $sql = "SELECT * FROM paciente";
+    $resultado = $conexao->query($sql);
+    $consulta = $resultado->fetchAll(PDO::FETCH_ASSOC); 
+    return $consulta; 
 }
 
 

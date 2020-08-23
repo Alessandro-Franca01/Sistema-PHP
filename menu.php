@@ -58,7 +58,7 @@ if(!$_SESSION['validacao']){
             ?>
             </li>
             <li class="list-group-item ">
-              <a clas="list-group-item" href="./cad_paciente.php"> Cadastro de Paciente</a>
+              <a clas="list-group-item" href="./cad_paciente.php"> Cadastro de paciente</a>
             </li>
             <li class="list-group-item">
               <a clas="list-group-item" href="./controll/tabela_teste_novo.php"> Vizualizar tabela de agendametnos</a>  
@@ -68,7 +68,10 @@ if(!$_SESSION['validacao']){
             </li>
             <li class="list-group-item">
               <a clas="list-group-item" href="remover_atendimento.php"> Remover atendimento </a>
-            </li>            
+            </li>
+            <li class="list-group-item">
+              <a clas="list-group-item" href="./controll/lista_pacientes_controller.php"> Listar pacientes </a>
+            </li>             
             <!-- ARRUMAR ISSO --> 
             <li class="list-group-item">
               <a clas="list-group-item" href="./index.php?erro=logout"> Sair do sistema </a>

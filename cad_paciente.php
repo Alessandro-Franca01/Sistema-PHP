@@ -41,9 +41,7 @@ if(isset($_GET['consulta_pct'])){
   </head>
 
   <body>
-      <!-- Nao sei se crio uma div ou deixo assim mesmo? -->
     <nav class="navbar navbar-dark bg-dark ">
-      
       <a class="navbar-brand" href="#">
         <img src="./img/inc_form_paciente.png" width="30" height="30" >
         Cadastro de Paciente
@@ -51,7 +49,7 @@ if(isset($_GET['consulta_pct'])){
       <a href="./menu.php">
         <button class="btn btn-outline-secondary" type="button">Voltar ao Menu</button>
       </a>
-      </nav>
+      </nav>        
     <form action="./controll/validacao_cad_paciente.php" method="post">
     <div class="form-group">
         <label for="cad_pct_nome">Paciente</label>
@@ -62,6 +60,11 @@ if(isset($_GET['consulta_pct'])){
         <label for="cad_pct_responsavel">Responsável</label>
         <input type="text" class="form-control" name="cad_pct_responsavel" id="cad_pct_responsavel" placeholder="Primeiro Nome">
         <small id="help_respon" class="form-text text-muted">*Campo não obrigatorio </small>
+    </div>
+    <div class="form-group">
+          <label for="obs_agendamento">Diagnóstico</label>
+          <textarea class="form-control" name="cad_pct_dgn" id="cad_diagnostico"></textarea>
+          <small id="cad_pct_dgn" class="form-text text-muted">*Campo não obrigatorio </small>
     </div>
     <div class="form-group">
         <label for="cad_pct_telefone">Telefone</label>
@@ -78,9 +81,36 @@ if(isset($_GET['consulta_pct'])){
         <label for="data_nasc">Data de Nascimento</label>
         <input type="date" class="form-control" name="cad_pct_data_nasc" id="data_nasc">
     </div>
-    <button onclick="acao()" type="submit" class="btn btn-primary">Enviar</button>
+    <button type="submit" class="btn btn-primary">Enviar</button>
     <button type="reset" class="btn btn-secundary">Cancelar</button>
     </form>
+    
+    <script>
+      // Script da mensaguem de validação: FUNCINONADO!
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        if (url.searchParams.get("cadastro") != null){
+          var getParamtroCadastro = url.searchParams.get("cadastro");
 
+          if(getParamtroCadastro == "efetuado"){
+            console.log(url); 
+            console.log(getParamtroCadastro);
+            alert("Paciente cadastrado com sucesso!");
+          }
+          if(getParamtroCadastro == "nao_efetuado"){ 
+            console.log(url); 
+            console.log(getParamtroCadastro);
+            alert("Cadastro do paciente NÃO foi realizado.");
+          }
+          else{
+            // NÃO É PARA ENTRAR AQUI!
+
+            console.log(url); 
+            console.log(getParamtroCadastro);
+          }
+          
+        }
+        
+    </script>
   </body>
 </html>

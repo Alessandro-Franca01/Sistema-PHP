@@ -3,7 +3,6 @@
 # ESSA PAGINA NAO TEM NENHUM TRATAMENTO DE ERRO!
 
 session_start();
-// Sei nem pra que serve isso!
 if(!isset($_GET['login']) ){
   $_SESSION['validacao'] = false;
 
@@ -12,15 +11,11 @@ if(!isset($_GET['login']) ){
 ?>
 
 <html>
-                <!-- Ajustar esse codigo para ficar responsivo mobile/notebook -->  
   <head>
     <meta charset="utf-8" />
-    <!-- Depois que apliquei essa meta ficou responsivo sem usar a referencia 'sm' -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       
-    <title>Programa de Darcilene</title>
-    <!-- Usando o bootstrap atraves do link, porem nao é responsivo -->
-    <!-- Deixar essa pagina responsiva, baixa o bootstrap para usar o diretorio salvo -->    
+    <title>Programa de Darcilene</title>   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <script>
@@ -44,7 +39,6 @@ if(!isset($_GET['login']) ){
     <nav class="navbar navbar-dark bg-dark ">
       
       <a class="navbar-brand" href="#">
-        <!-- Ja está responsivo kkkk, mas a img bugo! *class="d-inline-block align-top" alt="" -->
         <img src="./img/incone_formulario.jpg" width="30" height="30" >
         Formulario de Login
       </a>
@@ -52,15 +46,13 @@ if(!isset($_GET['login']) ){
 
     <div class="container">    
       <div class="row">
-
         <div class="card-login">
           <div class="card">
             <div class="card-header">
               Login 
             </div>
-            <div class="card-body">
-             <!-- Usar o metodo POST -->   
-              <form action="./controll/validacao_user.php">
+            <div class="card-body">   
+              <form action="./controll/validacao_user.php" method="post">
                 <div class="form-group">
                   <input name="email" type="email" class="form-control" placeholder="E-mail">
                 </div>

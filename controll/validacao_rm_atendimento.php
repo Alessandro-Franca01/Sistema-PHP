@@ -45,24 +45,20 @@ try{
   # Poderia ao inves de usar ifs aninhados colocar funcões com valores boleanos, mas nao sei se é um boa pratica!
   if(isset($array_paciente[0])){ 
     $validar_paciente = true;
-    $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'], $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone']);
-    $paciente->toString();
-    echo "<br> data formato sql: $data_sql";
+    $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'],
+                            $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone'], $array_paciente[0]['diagnostico']);
     // Consultando atendimento: FUNCIONANDO!
     $array_atendimento = consultarAtendimento($conexao, $data_sql); 
 
     if(isset($array_atendimento[0])){
         $atendimento = new Atendimento($array_atendimento[0]['IDAtendimento'], $array_atendimento[0]['valor'], $array_atendimento[0]['observacao']
           , $array_atendimento[0]['data_atendimento'], $array_atendimento[0]['ID_Usuario'], $array_atendimento[0]['ID_Paciente']);
-        echo '<br>';
-        print_r($array_atendimento);
-        echo '<br> Data do Atendimento: '.$atendimento->__get('data_atendimento');
 
         // Verificando se os pacientes são iguais: FUNCIONANDO!!!
         if($paciente->__get('idPaciente') == $atendimento->__get('id_paciente')){
             $comparando_pacientes = true;
             $resultado_query = removerAtendimento($conexao, $atendimento); 
-            echo '<br>Linhas afetadas:'.$resultado_query;
+            //echo '<br>Linhas afetadas:'.$resultado_query;
           }else{
             echo '<h2> O paciente resgistrado para esse atendimento NÃO é esse!';
           }
@@ -77,6 +73,13 @@ try{
 catch(PDOException $e){
   echo "Erro: ".$e->getCode();
   echo "<br>Messagem: ".$e->getMessage();
+}
+
+// Logica de redirecionamento:
+if($resultado_query == 1){
+  header('Location: ../remover_atendimento.php?atendimento=removido');
+}else{
+  header('Location: ../remover_atendimento.php?atendimento=nao_removido');
 }
 
 

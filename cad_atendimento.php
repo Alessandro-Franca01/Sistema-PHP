@@ -89,5 +89,31 @@ if(!$_SESSION['validacao']){
       <button type="reset" class="btn btn-secundary">Cancelar</button>
     </form>
 
+    <script>
+      // Script da mensaguem de validação: FUNCINONADO!
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        if (url.searchParams.get("atendimento") != null){
+          var getParamtroCadastro = url.searchParams.get("atendimento");
+
+          if(getParamtroCadastro == "efetuado"){
+            console.log(url); 
+            console.log(getParamtroCadastro);
+            alert("Atendimento agendado com sucesso!");
+          }
+          if(getParamtroCadastro == "nao_efetuado"){ 
+            console.log(url); 
+            console.log(getParamtroCadastro);
+            alert("Atendimento NÃO foi possível de ser agendado.");
+          }
+          else{
+            // NÃO É PARA ENTRAR AQUI!
+            console.log(url); 
+            console.log(getParamtroCadastro);
+          }
+          
+        }
+        
+    </script>
   </body>
 </html>
