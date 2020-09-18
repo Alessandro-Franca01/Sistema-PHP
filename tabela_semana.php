@@ -8,7 +8,7 @@
     session_start();
 
     // Data gerada pelo usuario: Na pratica
-    $data = ' 2020-07-20';
+    //$data = ' 2020-09-07';
 
     # Recebendo o array atendimentos do banco de dados
     //***Lembrar de tirar essa negação!
@@ -18,8 +18,8 @@
     }
 
     // Funcao gera os horarios de um dia:
-    # Essa data vai ser colocada pelo o usuario
-    $semana = gerarSemana(new DateTime($data)); # Fiz um alteração no espaçamente inicial: entrar com a $data
+    # Essa data vai ser colocada pelo o usuario: Gerando semana automaticamente ( FUNCIONANDO/EM TESTE !!!)
+    $semana = gerarSemana(new DateTime('last Monday')); # Fiz um alteração no espaçamente inicial: entrar com a $data
     $lista_horarios = gerarHorarios($semana[0], 8, 21);
     
     // Resultado: lista de objetos Table de um unico
@@ -87,34 +87,32 @@
     <!-- Bootstrap CSS *<div class="container-fluid bg-dark">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script>
-    
-        function acao(){
-          //alert('Paciente Cadastrado')
-          
-        }
-    </script>
-
   </head>
   
   <body class = "bg-light">
     
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
-          <img src="./img/inc_form_atendimento.jpg" width="30" height="30">
-          Agendamentos
+        <!-- Usando icones do proprio bootstrap: FUNCIONANDO -->
+        <!-- <img src="./img/inc_form_atendimento.jpg" width="30" height="30"> --> 
+          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-week" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+            <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+          </svg>
+          <!-- Ficou bem melhor assim -->
         </a>
-        <!-- FUNCIONANDO PORÉM TEM QUE AJEITAR AGUMAS COISAS -->
-        <button class="btn btn-outline-secondary" onclick="print()" type="submit">Imprimir</button>
-
+        <div class="navbar-brand mr-auto">
+          Agendamentos
+        </div>
         <form action="./menu.php">
           <button class="btn btn-outline-secondary" type="submit">Voltar ao Menu</button>
         </form>
+        
     </nav>
 
       <div>
 
-          <table class="table">
+          <table class="table table-hover">
             <thead class="thead-dark">
               <tr>
                 <th>horario</th>

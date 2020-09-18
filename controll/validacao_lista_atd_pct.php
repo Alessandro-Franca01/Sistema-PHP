@@ -1,5 +1,5 @@
 <?php
-# SCRIPT DA LOGICA DA LISTAGEM DO BANCO DE DADOS
+# SCRIPT PARA GERAR A LISTA AUTOMATICA DE PACIENTES PARA CADASTRAR E REMOVER ATENDIMENTOS
 
 //  Includes:
 include('../model/dao/conexao_novo_dao.php'); 
@@ -12,9 +12,9 @@ if(!$_SESSION['validacao']){
   header('Location: ./index.php?erro=user_nao_logado');
 }
 
-$origin = $_GET['remover_pct'];
-
 # Arrays e Variaveis:
+$pagina = $_GET['page'];
+//$pagina = $_GET['origin'];
 $array_users = array();
 $lista_paciente = array();
 $redirecionamento = false;
@@ -24,7 +24,7 @@ try{
     $conexao = bd_conectar();
     $lista_paciente = bdConsultarTodosPacientes($conexao);
     $redirecionamento = true;
-    $_SESSION['lista_pacientes'] = $lista_paciente; // Gambiarra ( Mudar isso!)
+    $_SESSION['lista_cad_pct'] = $lista_paciente; // Gambiarra ( Mudar isso!)
     
 }
 catch(PDOException $e){
@@ -32,14 +32,12 @@ catch(PDOException $e){
     echo "<br>Messagem: ".$e->getMessage();
 }
 
-// Logica de redirecionamento: ../lista_pacientes2.php?remocao=removido
-if(($redirecionamento == true) and (!isset($origen))){
-  header('Location: ../lista_pacientes2.php');
-}
-elseif(($redirecionamento == true) and ($origen == 'remover_pct')){
-  header('Location: ../lista_pacientes2.php?remocao=removido');
-}
-else{
+// Logica de redirecionamento: To lembrado bem desses codigos não!!
+if(($redirecionamento == true) and ($pagina =='cadastro')){
+  header('Location: ../cad_atendimento.php');
+}elseif(($redirecionamento == true) and ($pagina == 'remover')){
+  header('Location: ../remover_atendimento.php');
+}else{
   header('Location: ../menu.php');
 }
 

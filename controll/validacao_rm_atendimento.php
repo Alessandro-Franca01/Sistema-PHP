@@ -46,7 +46,7 @@ try{
   if(isset($array_paciente[0])){ 
     $validar_paciente = true;
     $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'],
-                            $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone'], $array_paciente[0]['diagnostico']);
+                            $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone'], $array_paciente[0]['diagnostico'], $array_paciente[0]['responsavel']);
     // Consultando atendimento: FUNCIONANDO!
     $array_atendimento = consultarAtendimento($conexao, $data_sql); 
 
@@ -58,7 +58,6 @@ try{
         if($paciente->__get('idPaciente') == $atendimento->__get('id_paciente')){
             $comparando_pacientes = true;
             $resultado_query = removerAtendimento($conexao, $atendimento); 
-            //echo '<br>Linhas afetadas:'.$resultado_query;
           }else{
             echo '<h2> O paciente resgistrado para esse atendimento NÃO é esse!';
           }

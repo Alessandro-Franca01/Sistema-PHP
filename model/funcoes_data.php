@@ -186,9 +186,9 @@ function horario3($hora, $objetos_linha, $objetos_comparados){
                 $nome = $obj_temp->__get("paciente");
                 $array_name = explode(' ',$nome);
                 $first_name = $array_name[0];
-                echo "<td>".$first_name."</td>";
+                echo '<td class="text-success">'.$first_name.'</td>';
             }else{
-            echo "<td>".$obj->__get("paciente")."</td>"; // esta errado aqui!
+              echo "<td>".$obj->__get("paciente")."</td>"; // esta errado aqui!
             }
             $cont++;
         }

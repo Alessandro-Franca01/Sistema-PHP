@@ -10,8 +10,20 @@ if(!$_SESSION['validacao']){
   header('Location: ./index.php?erro=user_nao_logado');
 }
 
-$lista_paciente = $_SESSION['lista_pacientes'];
+// Passando um array associativo:
+$paciente = $_SESSION['pct_show'];
 
+/*
+     h5{
+          text-align: center;
+          color: rgb(255, 255, 255);
+          background-color: #851944;
+          padding: 24px;
+          margin: 0;
+          white-space: nowrap;
+        }
+
+*/
 ?>
 
 
@@ -30,6 +42,7 @@ $lista_paciente = $_SESSION['lista_pacientes'];
         width: 450px;
         margin: 0 auto;
       }
+ 
     </style>
   </head>
 
@@ -37,38 +50,32 @@ $lista_paciente = $_SESSION['lista_pacientes'];
 
     <nav class="navbar navbar-dark bg-dark ">
       
-      <a class="navbar-brand" href="#">
-        <!-- Ja está responsivo kkkk, mas a img bugo! *class="d-inline-block align-top" alt="" -->
-        <img src="./img/incone_formulario.jpg" width="30" height="30" >
-        Lista de Pacientes
+      <a class="navbar-brand" href="menu.php">
+        <img src="./img/icone_show_pct3.png" width="30" height="30" >
+        Dados do Paciente
       </a>
-      <a href="./menu.php">
+      <a href="./lista_pacientes2.php">
         <button class="btn btn-outline-secondary" type="button">Voltar</button>
       </a>
     </nav>
-
-    <!-- Tenho que usar os cartoes junto com o grid    -->
     <div class="container">    
-      <div class="row">
-      
-      <?php foreach($lista_paciente as $paciente) { ?>
-         <!-- Falto instanciar o objeto  -->
+      <div class="row">        
           <div class="card-login">
             <div class="card">
               <div class="card-header">
                 Dados do Paciente
               </div>
-                  <div class="card-body">                    
-                      <h5> Nome : <?php echo $paciente['nome']; ?> </h5> 
-                      <h5> Resposanvel: <?php echo $paciente['responsavel']; ?></h5>
+                  <div class="card-body">   
+                             <!-- Melhorar o modelo desse card 'remover o <br>'   -->                 
+                      <h5> Nome : <?php echo $paciente['nome']; ?> </h5>
+                      <h5> Resposanvel: <?php echo $paciente['responsavel']; ?> </h5>
                       <h5> Email: <?php echo $paciente['email']; ?> </h5>
                       <h5> Telefone: <?php echo $paciente['telefone']; ?> </h5>
                       <h5> Data de Nascimento: <?php echo $paciente['data_nasc']; ?> </h5>
-                      <h5> Diagnostico:<?php echo $paciente['diagnostico']; ?> </h5>
+                      <h5> Diagnostico: <?php echo $paciente['diagnostico']; ?> </h5>
                   </div> 
               </div>
           </div>          
-      <?php } ?>
        
       </div>
     </div>

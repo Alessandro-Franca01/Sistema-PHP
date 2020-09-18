@@ -32,6 +32,7 @@ if(!isset($_GET['login']) ){
         margin: 0 auto;
       }
     </style>
+    
   </head>
 
   <body>

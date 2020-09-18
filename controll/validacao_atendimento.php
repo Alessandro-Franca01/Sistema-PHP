@@ -22,8 +22,10 @@ $valor = $_POST['valor'];
 $horario = $_POST['horario_atend'].':00'; // Concatenando para o formato com os segundos
 $data_atend = $_POST['data_atend'];
 $obsercao = $_POST['obs_atend'];
-// Data no formato sql:
+
+// Arrumando as variaveis:
 $data_sql = $data_atend.' '.$horario; 
+$valor_filter = str_replace(",", ".", $valor);
 
 // Variaveis e arrays:
 $array_paciente = array();
@@ -38,20 +40,18 @@ try{
   if(isset($array_paciente[0])){ 
     $validar_paciente = true;
     $paciente = new Paciente($array_paciente[0]['IDPaciente'], $array_paciente[0]['nome'], $array_paciente[0]['email'],
-                            $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone'], $array_paciente[0]['diagnostico']);
-    $paciente->toString();
-    echo '<br>';
-    print_r($_POST);
-    echo "<br> data formato sql: $data_sql";
-    echo '<br>ID Usuario:';
-    echo $_SESSION['id_user'];
+                            $array_paciente[0]['data_nasc'], $array_paciente[0]['telefone'], $array_paciente[0]['diagnostico'], $array_paciente[0]['responsavel']);
+
+    $atendimento = new Atendimento(null, $valor_filter , $obsercao, $data_sql, $usuario->__get('id'), $paciente->__get('idPaciente'));
+    $resultado_query = inserirAtendimento($conexao, $atendimento); 
+    #echo "Resultado de consulta";
+    #var_dump($resultado_query); // false
+    //header('Location: ../cad_atendimento.php?atendimento=efetuado');
+  }else{
+    //header('Location: ../cad_atendimento.php?atendimento=nao_efetuado');
+    #echo "Resultado de consulta";
+    #var_dump($resultado_query); // null
   }
-
-
-  // Instaciando o Atendimento:
-  $atendimento = new Atendimento(null, $valor, $obsercao, $data_sql, $usuario->__get('id'), $paciente->__get('idPaciente'));
-  $resultado_query = inserirAtendimento($conexao, $atendimento); 
-  //echo '<br>Linhas afetadas:'.$resultado_query;
   
 }
 catch(PDOException $e){
@@ -59,16 +59,18 @@ catch(PDOException $e){
   echo "<br>Messagem: ".$e->getMessage();
 }
 
+
 // Logica de redirecionamento:
 if($resultado_query == 1){
   header('Location: ../cad_atendimento.php?atendimento=efetuado');
-}else{
+}elseif($resultado_query == false){
   header('Location: ../cad_atendimento.php?atendimento=nao_efetuado');
+}elseif($resultado_query == null){
+  header('Location: ../cad_atendimento.php?atendimento=nao_efetuado');
+}else{
+  // Não é para entrar aqui!
+  echo '<h1> Erro no agedamento do paciente, por favor tente novamente ou consulte o programador</h1>';
 }
-
-
-
-
 
 
 ?>

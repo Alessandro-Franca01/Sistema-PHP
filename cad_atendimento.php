@@ -7,6 +7,8 @@ if(!$_SESSION['validacao']){
   header('Location: ./index.php?erro=user_nao_logado');
 }
 
+$lista_paciente = $_SESSION['lista_cad_pct'];
+
 ?>
 
 <html>
@@ -47,10 +49,13 @@ if(!$_SESSION['validacao']){
       <!-- Usar o metodo POST -->
     <form action="./controll/validacao_atendimento.php" method="post">
       <div class="form-group">
-          <label for="nome_paciente">Paciente</label>
-          <input type="text" class="form-control" name="paciente_atend" id="nome_paciente" placeholder="Nome e Sobre Nome">
-          <small id="small_pacinete" class="form-text text-muted">*Não use preposições tipo: de,da,do </small>
-      </div>
+            <label for="select_cad_atendimento">Pacientes</label>
+            <select class="form-control" name="paciente_atend" id="slt_nome_atend_pct">
+            <?php foreach($lista_paciente as $paciente) { ?>
+              <option><?php  echo $paciente['nome']?></option>
+            <?php } ?>
+            </select>
+      </div> 
       <div class="form-group">
           <label for="tx_reponsavel">Valor</label>
           <input type="text" class="form-control" name="valor" id="nome_repon" placeholder="Valor do atendimento">

@@ -23,8 +23,7 @@ $linhas_afetadas = null;
 
 try{
     $conexao = bd_conectar();
-// Se o nome do paciente estiver registrado no banco vai entrar no else e fazer o cadastro, isso bem bem vulneravél
-    $consulta_paciente = bdConsultarPacienteCompleta($conexao, $email, $paciente_nome);
+    $consulta_paciente = bdConsultarPacienteCompleta($conexao, $paciente_nome, $data_nasc);
     # MELHORAR ESSA LOGICA DEPOIS!
 
     if(isset($consulta_paciente[0])){

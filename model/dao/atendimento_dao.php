@@ -12,12 +12,20 @@ function inserirAtendimento($conexao, $atendimento){
     return $resultado;
 }
 
-# Funcao para verificar se um atendimento existe: FUNCIONANDO!!
+# Funcao para verificar se um atendimento existe: AJEITAR PARA PEGAR SOMENTE A SEMANA CERTA !
 function consultarAtendimento($conexao, $data){
 $sql = "SELECT* FROM atendimento WHERE data_atendimento = '{$data}'";
     $resultado = $conexao->query($sql);
     $consulta = $resultado->fetchAll(PDO::FETCH_ASSOC); 
     return $consulta; 
+}
+
+# Função para consultar todos os atendimentos de um paciente pelo IDPaciente: TESTANDO
+function consultarAtendimentosByIDpct($conexao, $id_paciente){
+    $sql = "SELECT* FROM atendimento WHERE ID_Paciente = '{$id_paciente}'";
+    $resultado = $conexao->query($sql);
+    $consulta = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    return $consulta;  
 }
 
 # Funcao para remover um atendimento: FUNCIONANDO!

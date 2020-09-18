@@ -3,6 +3,8 @@
 include('./model/Usuario.php');
 
 session_start();
+
+// Validação da sessão do usuario
 if(!$_SESSION['validacao']){
   header('Location: ./index.php?erro=user_nao_logado');
 }
@@ -17,7 +19,7 @@ if(!$_SESSION['validacao']){
     <title>Programa de Darcilene</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       .card-login {
         padding: 30px 0 0 0;
@@ -39,7 +41,7 @@ if(!$_SESSION['validacao']){
   </head>
 
   <body>
-  <!-- Cabeçalho do pagina de menu-->  
+  <!-- Cabeçalho do pagina de menu, alert + botao fechar nao esta funcionando -->  
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">
         <img src="./img/menu.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -58,21 +60,26 @@ if(!$_SESSION['validacao']){
             ?>
             </li>
             <li class="list-group-item ">
-              <a clas="list-group-item" href="./cad_paciente.php"> Cadastro de paciente</a>
+            <!-- TESTANDO A SETINHA COM TAG <i>, Continuar teste outro dia   -->
+              <a clas="list-group-item" href="cad_paciente.php">Cadastro de paciente(icone)<i class="fas fa-angle-right"></i> </a>
             </li>
             <li class="list-group-item">
               <a clas="list-group-item" href="./controll/tabela_teste_novo.php"> Vizualizar tabela de agendametnos</a>  
             </li>
             <li class="list-group-item">
-              <a clas="list-group-item" href="cad_atendimento.php"> Agendar atendimento </a>
+              <a clas="list-group-item" href="./controll/validacao_lista_atd_pct.php?page=cadastro"> Agendar atendimento </a>
             </li>
             <li class="list-group-item">
-              <a clas="list-group-item" href="remover_atendimento.php"> Remover atendimento </a>
+              <a clas="list-group-item" href="./controll/validacao_lista_atd_pct.php?page=remover"> Remover atendimento </a>
             </li>
             <li class="list-group-item">
               <a clas="list-group-item" href="./controll/lista_pacientes_controller.php"> Listar pacientes </a>
-            </li>             
-            <!-- ARRUMAR ISSO --> 
+            </li>
+            <!-- Ainda falta implementar o back-end --> 
+            <li class="list-group-item">
+              <a clas="list-group-item" href="./ficha_atendimento.php"> Ficha de Atedimento</a>
+            </li>                
+            <!-- Fazer o controller dessa funcionalidade --> 
             <li class="list-group-item">
               <a clas="list-group-item" href="./index.php?erro=logout"> Sair do sistema </a>
             </li>

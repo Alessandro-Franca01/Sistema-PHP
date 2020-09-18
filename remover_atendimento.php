@@ -7,6 +7,8 @@ if(!$_SESSION['validacao']){
   header('Location: ./index.php?erro=user_nao_logado');
 }
 
+$lista_paciente = $_SESSION['lista_cad_pct'];
+
 ?>
 
 <html>
@@ -34,10 +36,14 @@ if(!$_SESSION['validacao']){
       
     <form action="./controll/validacao_rm_atendimento.php" method="post">
       <div class="form-group">
-          <label for="nome_paciente">Paciente</label>
-          <input type="text" class="form-control" name="nome_rm_paciente" id="nome_rm_paciente" placeholder="Nome e Sobre Nome">
-          <small id="small_pacinete" class="form-text text-muted">*Não use preposições tipo: de,da,do </small>
-      </div>
+            <label for="select_cad_atendimento">Pacientes</label>
+            <select class="form-control" name="nome_rm_paciente" id="nome_rm_paciente">
+            <?php foreach($lista_paciente as $paciente) { ?>
+              <option><?php  echo $paciente['nome']?></option>
+            <?php } ?>
+            </select>
+            <small id="small_pacinete" class="form-text text-muted">*Campo obrigatório </small>
+      </div> 
       <div class="form-group">
           <label for="select_cad_atendimento">Horario do Atendimento</label>
           <select class="form-control" name="horario_rm_atend" id="select_cad_atendimento">
@@ -80,7 +86,7 @@ if(!$_SESSION['validacao']){
           if(getParamtroCadastro == "nao_removido"){ 
             console.log(url); 
             console.log(getParamtroCadastro);
-            alert("NÃO foi possével remover o atendimento.");
+            alert("NÃO foi possível remover o atendimento.");
           }
           else{
             // NÃO É PARA ENTRAR AQUI!
