@@ -1,7 +1,7 @@
 <?php
 # Script das operações feitas do Objeto Atendimento ao banco de dados:
 
-#Funcao para inserir um registro de atendimento no banco de dados: FUNCIONANDO!
+#Funcao para inserir um registro de atendimento no banco de dados: FUNCIONANDO! (Nao precisa instanciar o objeto aqui)
 function inserirAtendimento($conexao, $atendimento){
     $sql = "INSERT INTO atendimento(data_atendimento, valor, observacao, ID_Usuario, ID_Paciente)
         VALUES('{$atendimento->__get('data_atendimento')}', {$atendimento->__get('valor')},
@@ -10,6 +10,10 @@ function inserirAtendimento($conexao, $atendimento){
     $stm = $conexao->prepare($sql);
     $resultado = $stm->execute();
     return $resultado;
+    //
+    $stm = $conexao->prepare($sql);
+    $resultado = $stm->execute(); // NAO ESTÁ INSERINDO!
+    return $resultado; 
 }
 
 # Funcao para verificar se um atendimento existe: AJEITAR PARA PEGAR SOMENTE A SEMANA CERTA !

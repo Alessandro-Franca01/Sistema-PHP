@@ -5,7 +5,6 @@
 session_start();
 if(!isset($_GET['login']) ){
   $_SESSION['validacao'] = false;
-
 }
 
 ?>
@@ -18,12 +17,10 @@ if(!isset($_GET['login']) ){
     <title>Programa de Darcilene</title>   
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script>
-      // Começar a implementação dos codigos em java script na aplicação:
-        function validacao(){
-          
-        }
-    </script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript"></script>
+
+    <link rel="shortcut icon" href="./img/menu.png" >
 
     <style>
       .card-login {
@@ -55,13 +52,20 @@ if(!isset($_GET['login']) ){
             <div class="card-body">   
               <form action="./controll/validacao_user.php" method="post">
                 <div class="form-group">
-                  <input name="email" type="email" class="form-control" placeholder="E-mail">
+                  <input name="email" type="text" class="form-control" placeholder="E-mail">
                 </div>
                 <div class="form-group">
                   <input name="senha" type="password" class="form-control" placeholder="Senha">
                 </div>
-                <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>
-                <!-- "Criando um botao para fazer o cadasro do usuario, *AJEITAR ESSE BOTAO COM LINK" -->                
+                <!-- Fazer a implementação de feedback de erro de login --> 
+                <?php
+                if(isset($_GET["login"])){
+                  echo '<p class="text-danger text-center">'.'Email ou senha inválida(s)!'.'</p>';
+                }elseif(isset($_GET["validacao"])){
+                  echo '<p class="text-danger text-center">'.'Campo(s) em branco!'.'</p>';
+                }
+                ?>
+                <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>                                
                 <button class="btn btn-lg btn-info btn-block" type="button">
                   <a class="btn btn-lg btn-info btn-block" href="#">
                     Cadastrar-se

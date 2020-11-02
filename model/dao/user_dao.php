@@ -1,8 +1,5 @@
 <?php
-
-include_once('../Usuario.php');
 # Script de acesso ao banco para metodos do usuario:
-session_start();
 
 // Consultando os usuarios: Posso mudar a forma como pesquiso o usuario com WHERE
 function bd_consultarUsuarios($conexao){

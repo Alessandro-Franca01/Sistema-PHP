@@ -11,16 +11,52 @@ session_start();
 $paciente_nome = $_POST['cad_pct_nome'];
 $responsavel = $_POST['cad_pct_responsavel']; // falta add esse campo no banco de dados
 $telefone = $_POST['cad_pct_telefone'];
-$data_nasc = $_POST['cad_pct_data_nasc'];
+$data_nasc = $_POST['cad_pct_data_nasc']; 
 $email = $_POST['cad_pct_email'];
 $diagnostico = $_POST['cad_pct_dgn'];
-//var_dump($_POST);  
 
 // Variaveis e Arrays:
 $redirecionamento = null;
 $novo_paciente = null;
 $linhas_afetadas = null;
 
+// FUNÇAO DE SANITIZAÇÃO DA DOCUMENTAÇÃO: FUNCIONANDO , MUITO BOM!!
+
+/**
+        * @param str => $valor = valor a ser sanitizado
+        * @param bol => $allow_accents = permitir acentos
+        * @param bol => $allow_spaces = permitir espaços
+        */
+        function alfabetico($valor, bool $allow_accents = true, bool $allow_spaces = false){
+            $valor = str_replace(array('"', "'", '`', '´', '¨'), '', trim($valor));
+            if(!$allow_accents && !$allow_spaces){
+                return preg_replace('#[^A-Za-z]#', '', $valor);
+            }
+            if($allow_accents && !$allow_spaces){
+                return preg_replace('#[^A-Za-zà-źÀ-Ź]#', '', $valor);
+            }
+            if(!$allow_accents && $allow_spaces){
+                return preg_replace('#[^A-Za-z ]#', '', $valor);
+            }
+            if($allow_accents && $allow_spaces){
+                return preg_replace('#[^A-Za-zà-źÀ-Ź ]#', '', $valor);
+            }               
+        }
+    
+// Testando validações de com filter_var():
+
+$filterEmail = filter_var($email, FILTER_VALIDATE_EMAIL);  # FUNCIONANDO
+$resultado = filter_has_var(INPUT_POST, 'cad_pct_email'); # FUNCIONANDO
+$resultNome = alfabetico($paciente_nome, true, true);
+
+if($resultado){
+    var_dump($_POST); 
+    echo 'Nome do paciente limpo: '.$resultNome;
+}else{
+    //echo "Campos não validado";
+    echo 'Entrou no ELSE';
+}
+/*
 try{
     $conexao = bd_conectar();
     $consulta_paciente = bdConsultarPacienteCompleta($conexao, $paciente_nome, $data_nasc);
@@ -47,6 +83,4 @@ if($linhas_afetadas == 1){
     header('Location: ../cad_paciente.php?cadastro=efetuado');
 }else{
     header('Location: ../cad_paciente.php?cadastro=nao_efetuado');
-}
-
-?>
+}*/
