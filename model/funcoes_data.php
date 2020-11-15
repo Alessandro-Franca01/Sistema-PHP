@@ -3,6 +3,29 @@
  date_default_timezone_set('America/Recife');
 
 // Essa função vai gerar todoas as datas por semana: FUNCIONANDO!
+  # Logica da função para gerar a segunda automaticamente:
+  /*
+      * Essa funão vai receber o dia atual e vai retorna a data da segunda-feria, como ?
+      * Se caso o dia atual for terça a Sabado: Retorna a proxima segunda,
+      * Caso o dia atual seja segunda-feira, então retorna a propria data,
+      * Se a data atual for do domingo, então vai ser gerado a proxima segunda-feira;
+  */
+  // Funçao para gerar a segunda-feira automaticamente: Funcionando "Colocar em produção"
+  function getMonday(DateTime $data_atual) : ?DateTime {
+    if($data_atual->format('l') == "Sunday"){
+        return New DateTime('next Monday');
+    }
+    elseif($data_atual->format('l') == "Monday"){
+        return New DateTime();
+    }
+    elseif($data_atual->format('l') == "Tuesday" || $data_atual->format('l') == "Wednesday"
+            || $data_atual->format('l') == "Thursday" || $data_atual->format('l') == "Friday"
+            || $data_atual->format('l') == "Saturday"){
+        return New DateTime('last Monday');
+    }else{
+        return null;
+    }    
+  }
 
     # Funcionando corretamente! 
     function horario($hora){

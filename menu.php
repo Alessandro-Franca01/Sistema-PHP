@@ -81,7 +81,7 @@ if(!$_SESSION['validacao']){
             </li>                
             <!-- Fazer o controller dessa funcionalidade --> 
             <li class="list-group-item">
-              <a clas="list-group-item" href="./controll/logoff.php"> Sair do sistema </a>
+              <a clas="list-group-item" href="./controll/logout.php"> Sair do sistema </a>
             </li>
           </ul>
         </div>

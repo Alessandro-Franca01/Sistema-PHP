@@ -22,9 +22,11 @@ $lista_paciente = $_SESSION['lista_cad_pct'];
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <script>
+    // Função que usadas para axuliar no front-end
         function acao(){
             alert('Atendimento agendado!')
         }
+
     </script>
 
     <style>
@@ -32,6 +34,10 @@ $lista_paciente = $_SESSION['lista_cad_pct'];
         padding: 30px 0 0 0;
         width: 350px;
         margin: 0 auto;
+      }
+
+      .teste-paragrafo {
+        
       }
     </style>
   </head>
@@ -46,7 +52,18 @@ $lista_paciente = $_SESSION['lista_cad_pct'];
         <button class="btn btn-outline-secondary" type="button">Voltar ao Menu</button>
       </a>
     </nav>
-      <!-- Usar o metodo POST -->
+      <!-- Div-alert está aparecendo, porem NÃO ESTÁ FECHANDO 
+    <?php #if($_GET['atendimento'] == 'efetuado'){ ?>
+
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <p> Agendamento feito com <strong> sucesso!</strong> </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    <?php #} ?>
+    -->
     <form action="./controll/validacao_atendimento.php" method="post">
       <div class="form-group">
             <label for="select_cad_atendimento">Pacientes</label>
@@ -93,18 +110,23 @@ $lista_paciente = $_SESSION['lista_cad_pct'];
       <button type="submit" class="btn btn-primary">Enviar</button>
       <button type="reset" class="btn btn-secundary">Cancelar</button>
     </form>
-
+    <!-- Começando a usar o JQUERY no sistema -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script>
       // Script da mensaguem de validação: FUNCINONADO!
         var url_string = window.location.href;
-        var url = new URL(url_string);
+        var url = new URL(url_string);        
         if (url.searchParams.get("atendimento") != null){
           var getParamtroCadastro = url.searchParams.get("atendimento");
-
           if(getParamtroCadastro == "efetuado"){
             console.log(url); 
             console.log(getParamtroCadastro);
-            alert("Atendimento agendado com sucesso!");
+            // Modificar esse alert, usando o jquery: NÃO ESTA FUNCIONANDO !            
+            //document.getElementsByName("textSuccess").style.color = "blue";
+            // var textSuccess = "Atendimento agendado com sucesso!"; 
+            //alert($('textoAlert').addClass('text-lowercase'));
+            let textoAlert = "Atendimento agendado com sucesso!";                    
+            alert(textoAlert);
           }
           if(getParamtroCadastro == "nao_efetuado"){ 
             console.log(url); 

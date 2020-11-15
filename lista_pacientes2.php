@@ -6,11 +6,12 @@ include('./model/paciente.php');
 
 session_start();
 
+// Todos os arquivos de front-end PHP estão com essa validação !?
 if(!$_SESSION['validacao']){
   header('Location: ./index.php?erro=user_nao_logado');
 }
 
-// Por estou passando a lista na SESSION ??
+// Passando a lista na SESSAO
 $lista_paciente = $_SESSION['lista_pacientes'];
 
 ?>

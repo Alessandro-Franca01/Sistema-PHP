@@ -8,19 +8,26 @@ include('../model/dao/conexao_novo_dao.php');
 session_start();
 $_SESSION['usuario_logado'] = null;
 
-// LIMPEZA E VALIDAÇÃO DOS CAMPOS DO FORMULARIO DE LOGIN
-// Limpando os campos: 
+// Antes de tudo vamos verificar o token do formulario: Funionando!
+$csrf_token = $_SESSION['csrf_token'] ?? false;
+
+if (!$csrf_token or $csrf_token !== filter_input(INPUT_POST, '_csrf_token')) {
+    die('CSRF token validation fail');
+}
+
+// LIMPEZA E VALIDAÇÃO DOS CAMPOS DO FORMULARIO DE LOGIN: SUBIR NO SERVER
 $emailLogin = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 $senhaLogin = filter_var($_POST['senha'], FILTER_SANITIZE_STRING);
 
-// Verificando NULO: Reenviar usuario para tela de login!
+// Verificando NULO: SUBIR NO SERVER
 if(($emailLogin == null) || ($senhaLogin == null)){
     header('Location: ../index.php?validacao=campo_em_branco');
     exit('Valores nulos');
 }
 
-// Validando campos: caso o valor não passe então o resultado vai ser false!!!
+// Validando EMAIL: SUBIR NO SERVER
 $resultado = filter_var($emailLogin, FILTER_VALIDATE_EMAIL);
+
 if(!$resultado){
     //echo "O campo não foi validado!<br>";
     header('Location: ../index.php?login=acesso_invalido');

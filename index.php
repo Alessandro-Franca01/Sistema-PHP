@@ -1,11 +1,18 @@
 <?php
 # INICIAR A APLICAÇÃO DO PROJETO DE DARCILENE 
-# ESSA PAGINA NAO TEM NENHUM TRATAMENTO DE ERRO!
 
-session_start();
+// Usando session_start() configurado:
+//session_start();
+
+// Esse comando vai passar a sessao já com as configurações: FUNCIONOU NORMAL
+require __DIR__.'\model\dao\session.php';
+
 if(!isset($_GET['login']) ){
   $_SESSION['validacao'] = false;
 }
+
+$_SESSION['csrf_token'] = sha1(rand(1, 20000));
+
 
 ?>
 
@@ -51,6 +58,7 @@ if(!isset($_GET['login']) ){
             </div>
             <div class="card-body">   
               <form action="./controll/validacao_user.php" method="post">
+                <input type="hidden" name="_csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                 <div class="form-group">
                   <input name="email" type="text" class="form-control" placeholder="E-mail">
                 </div>

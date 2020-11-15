@@ -7,8 +7,9 @@
     
     session_start();
 
-    // Data gerada pelo usuario: Na pratica
-    //$data = ' 2020-09-07';
+    if(!$_SESSION['validacao']){
+      header('Location: ./index.php?erro=user_nao_logado');
+    }
 
     # Recebendo o array atendimentos do banco de dados
     //***Lembrar de tirar essa negação!
@@ -18,8 +19,9 @@
     }
 
     // Funcao gera os horarios de um dia:
-    # Essa data vai ser colocada pelo o usuario: Gerando semana automaticamente ( FUNCIONANDO/EM TESTE !!!)
-    $semana = gerarSemana(new DateTime('last Monday')); # Fiz um alteração no espaçamente inicial: entrar com a $data
+    $data_atual = new DateTime();
+    $segunda_feira = getMonday($data_atual);
+    $semana = gerarSemana($segunda_feira); # Fiz um alteração no espaçamente inicial: entrar com a $data
     $lista_horarios = gerarHorarios($semana[0], 8, 21);
     
     // Resultado: lista de objetos Table de um unico

@@ -1,5 +1,5 @@
 <?php
-# Testando conuslta ao banco para a pagunda de tabela semanal
+# SCRIPT DE CONSULTA DO AGENDAMENTO DA TABELA SEMANAL
 include('../model/table.php');
 include('../model/dao/conexao_novo_dao.php');
 require('../model/dao/tabela_dao.php');
@@ -11,24 +11,23 @@ date_default_timezone_set('America/Recife');
 # Iniciando SESSÃO:
 session_start();
 
+// Erro de verificação: NAO ESTA FUNCIONANDO!!
+//$csrf_token = $_SESSION['csrf_token'] ?? false;
+
 // Arrays/ Variaveis:
 $redirecionamento = true; 
 $array_tb = null;
 
-// Datas:
-$data_inicial = new DateTime('last Monday');
+// Datas: EM PRODUÇÃO!
+$data_atual = new DateTime();
+$data_inicial = getMonday($data_atual);
 $data_final = new DateTime($data_inicial->format('Y-m-d'));
 $data_final->add(new DateInterval('P6D'));
-#$semana = gerarSemana(new DateTime('last Monday')); // Retornar um array da semana atual: FUNCIONANDO!
-#$data_inicial = $semana[0];
-#$data_final = end($semana);
 $lista_tabela = array();
 
-#print_r($new_date);
-// Iniciar a funcao de conexao
 try{
     $conexao = bd_conectar();
-    // Retorna somente a semana desejada: Funcionando!
+    // Retorna somente a semana desejada: Testando nova funcionalidade!
     $array_tb = bd_consultaTabela($conexao, $data_inicial->format('Y-m-d'), $data_final->format('Y-m-d'));
 }
 catch(PDOException $e){
