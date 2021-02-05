@@ -11,8 +11,9 @@ if(!isset($_GET['login']) ){
   $_SESSION['validacao'] = false;
 }
 
-$_SESSION['csrf_token'] = sha1(rand(1, 20000));
-
+$token = bin2hex(openssl_random_pseudo_bytes(32));
+$token_enviado = null;
+$_SESSION['csrf_token'] = $token;
 
 ?>
 
@@ -27,7 +28,7 @@ $_SESSION['csrf_token'] = sha1(rand(1, 20000));
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript"></script>
 
-    <link rel="shortcut icon" href="./img/menu.png" >
+    <link rel="shortcut icon" href="./img/logo.png" >
 
     <style>
       .card-login {
@@ -58,13 +59,20 @@ $_SESSION['csrf_token'] = sha1(rand(1, 20000));
             </div>
             <div class="card-body">   
               <form action="./controll/validacao_user.php" method="post">
-                <input type="hidden" name="_csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+              <!-- Validando o formulario com um token enviado pela sessão--> 
+                <input id="id_csrf_token" type="hidden" name="_csrf_token" value="<?php echo $token; ?>">
                 <div class="form-group">
-                  <input name="email" type="text" class="form-control" placeholder="E-mail">
+                  <input name="email" type="text" class="form-control" placeholder="E-mail" required>
                 </div>
                 <div class="form-group">
-                  <input name="senha" type="password" class="form-control" placeholder="Senha">
+                  <input name="senha" type="password" class="form-control" placeholder="Senha" required>
                 </div>
+                
+                <!-- Enviando arquivo upload  
+                <div class="form-group">
+                  <input class="form-control-file" name="arquivo" type="file">
+                </div> -->
+
                 <!-- Fazer a implementação de feedback de erro de login --> 
                 <?php
                 if(isset($_GET["login"])){
@@ -73,6 +81,8 @@ $_SESSION['csrf_token'] = sha1(rand(1, 20000));
                   echo '<p class="text-danger text-center">'.'Campo(s) em branco!'.'</p>';
                 }
                 ?>
+                <!-- Posso tentar depois enviar o token no momento em que o formulario for submetido
+                     usar a função onClick() e tentar alterar o valor do token dentro dela --> 
                 <button class="btn btn-lg btn-info btn-block" type="submit">Entrar</button>                                
                 <button class="btn btn-lg btn-info btn-block" type="button">
                   <a class="btn btn-lg btn-info btn-block" href="#">
